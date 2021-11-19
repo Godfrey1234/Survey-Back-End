@@ -207,7 +207,15 @@ exports.totalSurveys =async function(request, response) {
 
         if(results.length > 0)
         { 
-            response.send(results)
+
+
+        //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].con; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           response.send(JSON.stringify(value3));
+            
         } 
         else
         {
@@ -226,7 +234,12 @@ exports.avgAge =async function(request, response) {
 
         if(results.length > 0)
         { 
-            response.send(results)
+             //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].age; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           response.send(JSON.stringify(value3));
         } 
         else
         {
@@ -241,11 +254,16 @@ exports.avgAge =async function(request, response) {
 
 exports.oldPerson =async function(request, response) { 
 
-    connection.query('SELECT Max(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT Max(age) as maxi FROM users ',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+             //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].maxi; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           response.send(JSON.stringify(value3));
         } 
         else
         {
@@ -261,11 +279,16 @@ exports.oldPerson =async function(request, response) {
 
 exports.youngest =async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT Min(age) as m FROM users ',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+             //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].m; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           response.send(JSON.stringify(value3));
         } 
         else
         {
@@ -281,11 +304,36 @@ exports.youngest =async function(request, response) {
 
 exports.percPizza=async function(request, response) { 
 
-    connection.query('SELECT Min(age) as mini FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as totalPizza from favouritefood WHERE pizza = 1 ',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+            //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].totalPizza ; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           
+
+
+           //get number of people who participated in the survey
+           connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+          
+            if(results.length > 0){
+           //converting  object to string to parse to front end
+           let value1 = JSON.stringify(results)
+           this.value3 = JSON.parse(value1)
+           let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+           console.log(value4)
+
+
+           let perc = value3/value4 *100;
+           response.send(JSON.stringify(perc));
+            } 
+
+           })
+
+
         } 
         else
         {
@@ -302,18 +350,42 @@ exports.percPizza=async function(request, response) {
 
 exports.percPasta=async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as totalPizza from favouritefood WHERE pasta = 1 ',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+            //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].totalPizza ; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           
+
+
+           //get number of people who participated in the survey
+           connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+          
+            if(results.length > 0){
+           //converting  object to string to parse to front end
+           let value1 = JSON.stringify(results)
+           this.value3 = JSON.parse(value1)
+           let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+           console.log(value4)
+
+
+           let perc = value3/value4 *100;
+           response.send(JSON.stringify(perc));
+            } 
+
+           })
+
+
         } 
         else
         {
             response.send('error with query')
         }
     })
-
 }
 
 
@@ -322,29 +394,78 @@ exports.percPasta=async function(request, response) {
 
 exports.percPapAndWors=async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as totalPizza from favouritefood WHERE papAndWors = 1 ',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+            //converting  object to string to parse to front end
+           let value = JSON.stringify(results)
+           this.value2 = JSON.parse(value)
+           let value3 = this.value2[0].totalPizza ; // important part variable name should be the same as the one from the db
+           console.log(value3)
+           
+
+
+           //get number of people who participated in the survey
+           connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+          
+            if(results.length > 0){
+           //converting  object to string to parse to front end
+           let value1 = JSON.stringify(results)
+           this.value3 = JSON.parse(value1)
+           let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+           console.log(value4)
+
+
+           let perc = value3/value4 *100;
+           response.send(JSON.stringify(perc));
+            } 
+
+           })
+
+
         } 
         else
         {
             response.send('error with query')
         }
     })
-
 }
 
 //Api number of people who like to eat out
 
 exports.totEatOut=async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as meal FROM users where meals = 1 or meals = 2 or meals = 3',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+          
+            //converting  object to string to parse to front end
+            let value = JSON.stringify(results)
+            this.value2 = JSON.parse(value)
+            let value3 = this.value2[0].meal; // important part variable name should be the same as the one from the db
+            console.log(value3)
+            
+ 
+ 
+            //get number of people who participated in the survey
+            connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+           
+             if(results.length > 0){
+            //converting  object to string to parse to front end
+            let value1 = JSON.stringify(results)
+            this.value3 = JSON.parse(value1)
+            let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+            console.log(value4)
+ 
+ 
+            let AvgTv =  value3/value4 ;
+            response.send(JSON.stringify(AvgTv));
+             } 
+ 
+            })
+           
         } 
         else
         {
@@ -359,17 +480,43 @@ exports.totEatOut=async function(request, response) {
 
 exports.totMovie=async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as movies FROM users where movie = 1 or movie = 2 or movie = 3',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+          
+            //converting  object to string to parse to front end
+            let value = JSON.stringify(results)
+            this.value2 = JSON.parse(value)
+            let value3 = this.value2[0].movies; // important part variable name should be the same as the one from the db
+            console.log(value3)
+            
+ 
+ 
+            //get number of people who participated in the survey
+            connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+           
+             if(results.length > 0){
+            //converting  object to string to parse to front end
+            let value1 = JSON.stringify(results)
+            this.value3 = JSON.parse(value1)
+            let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+            console.log(value4)
+ 
+ 
+            let AvgMovies =  value3/value4 ;
+            response.send(JSON.stringify(AvgMovies));
+             } 
+ 
+            })
+           
         } 
         else
         {
             response.send('error with query')
         }
     })
+
 
 }
 
@@ -379,11 +526,36 @@ exports.totMovie=async function(request, response) {
 
 exports.totTv=async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as tv2 FROM users where tv = 1 or tv = 2 or tv = 3',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+          
+            //converting  object to string to parse to front end
+            let value = JSON.stringify(results)
+            this.value2 = JSON.parse(value)
+            let value3 = this.value2[0].tv2; // important part variable name should be the same as the one from the db
+            console.log(value3)
+            
+ 
+ 
+            //get number of people who participated in the survey
+            connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+           
+             if(results.length > 0){
+            //converting  object to string to parse to front end
+            let value1 = JSON.stringify(results)
+            this.value3 = JSON.parse(value1)
+            let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+            console.log(value4)
+ 
+ 
+            let AvgTv =  value3/value4 ;
+            response.send(JSON.stringify(AvgTv));
+             } 
+ 
+            })
+           
         } 
         else
         {
@@ -395,20 +567,46 @@ exports.totTv=async function(request, response) {
 
 
 
-//Api number of people who like to listen to music
+//Api number of people who like to listen to radio
 
 exports.totRadio=async function(request, response) { 
 
-    connection.query('SELECT Min(age) FROM users ',function (error, results, fields){
+    connection.query('SELECT COUNT(*) as radio FROM users where radio = 1 or radio = 2 or radio = 3',function (error, results, fields){
 
         if(results.length > 0)
         { 
-            response.send(results)
+          
+            //converting  object to string to parse to front end
+            let value = JSON.stringify(results)
+            this.value2 = JSON.parse(value)
+            let value3 = this.value2[0].radio; // important part variable name should be the same as the one from the db
+            console.log(value3)
+            
+ 
+ 
+            //get number of people who participated in the survey
+            connection.query('SELECT COUNT(*) as total From favouritefood ',function (error, results, fields){
+           
+             if(results.length > 0){
+            //converting  object to string to parse to front end
+            let value1 = JSON.stringify(results)
+            this.value3 = JSON.parse(value1)
+            let value4 = this.value3[0].total ; // important part variable name should be the same as the one from the db
+            console.log(value4)
+ 
+ 
+            let AvgRadio =  value3/value4 ;
+            response.send(JSON.stringify(AvgRadio));
+             } 
+ 
+            })
+           
         } 
         else
         {
             response.send('error with query')
         }
     })
+
 
 }
