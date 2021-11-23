@@ -115,9 +115,11 @@ exports.insertData =async function(request, response) {
   } 
   else
   {
+    if(age >= 5  && age <= 120){
+
   if(contact && radio && age &&  surname && name && date && meals && movie && tv && count > 0 ){
 
-
+    
  
          
       
@@ -183,6 +185,11 @@ else{
 
     response.send ('please ensure that you have entered all the values')
 }//end of if to check if user entered values
+
+    }
+    else{
+        response.send('only people above 5 and below 120 can complete this survey')
+    }
 
 }//end of checking number 
 
@@ -328,7 +335,8 @@ exports.percPizza=async function(request, response) {
 
 
            let perc = value3/value4 *100;
-           response.send(JSON.stringify(perc));
+           let perc2 =  Number(perc.toFixed(1)) // round to  1 decimal place
+           response.send(JSON.stringify(perc2));
             } 
 
            })
@@ -373,8 +381,9 @@ exports.percPasta=async function(request, response) {
            console.log(value4)
 
 
-           let perc = value3/value4 *100;
-           response.send(JSON.stringify(perc));
+           let perc = value3/value4 *100;   
+           let perc2 =  Number(perc.toFixed(1)) // round to  1 decimal place
+           response.send(JSON.stringify(perc2 ));
             } 
 
            })
@@ -418,7 +427,9 @@ exports.percPapAndWors=async function(request, response) {
 
 
            let perc = value3/value4 *100;
-           response.send(JSON.stringify(perc));
+           let perc2 =  Number(perc.toFixed(1)) // round to  1 decimal place
+           response.send(JSON.stringify(perc2 ));
+           
             } 
 
            })
@@ -460,8 +471,10 @@ exports.totEatOut=async function(request, response) {
             console.log(value4)
  
  
-            let AvgTv =  value3/value4 ;
-            response.send(JSON.stringify(AvgTv));
+            let AvgEatOut =  value3/value4 ;
+            let AvgEatOut2 =  Number(AvgEatOut.toFixed(1)) // round to  1 decimal place
+            response.send(JSON.stringify(AvgEatOut2));
+           
              } 
  
             })
@@ -505,7 +518,8 @@ exports.totMovie=async function(request, response) {
  
  
             let AvgMovies =  value3/value4 ;
-            response.send(JSON.stringify(AvgMovies));
+            let AvgMovies2 =  Number(AvgMovies.toFixed(1)) // round to  1 decimal place
+            response.send(JSON.stringify(AvgMovies2));
              } 
  
             })
@@ -551,7 +565,8 @@ exports.totTv=async function(request, response) {
  
  
             let AvgTv =  value3/value4 ;
-            response.send(JSON.stringify(AvgTv));
+            let AvgTv2 =  Number(AvgTv.toFixed(1)) // round to  1 decimal place
+            response.send(JSON.stringify(AvgTv2));
              } 
  
             })
@@ -596,7 +611,8 @@ exports.totRadio=async function(request, response) {
  
  
             let AvgRadio =  value3/value4 ;
-            response.send(JSON.stringify(AvgRadio));
+            let AvgRadio2 =  Number(AvgRadio.toFixed(1)) // round to  1 decimal place
+            response.send(JSON.stringify(AvgRadio2));
              } 
  
             })
